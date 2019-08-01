@@ -1,28 +1,74 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // ul = document.querySelector('ul')
-    // rank = document.querySelector('.rank')
-    // bookCover = document.querySelector('.book-cover')
-    // title = document.querySelector('.amazon')
-    // author = document.querySelector('.author')
-    // weeksOnList = document.querySelector('.weeks-on-list')
-    // description = document.querySelector('.description')
+   
 
 
     fetch('https://api.nytimes.com/svc/books/v3/lists/current/hardcover-nonfiction.json?api-key=BUIQC7YAgnXst97hx0H5lbct96vIQaSX')
     .then(parseJson)
     .then(getHardcoverNonFiction)
     
-    fetch('https://api.nytimes.com/svc/books/v3/lists/current/paperback-nonfiction.json?api-key=BUIQC7YAgnXst97hx0H5lbct96vIQaSX')
+    setTimeout(fetch('https://api.nytimes.com/svc/books/v3/lists/current/paperback-nonfiction.json?api-key=BUIQC7YAgnXst97hx0H5lbct96vIQaSX')
     .then(parseJson)
-    .then(getPaperbackNonFiction)
+    .then(getPaperbackNonFiction), 3000)
     
-    fetch('https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=BUIQC7YAgnXst97hx0H5lbct96vIQaSX')
+    setTimeout(fetch('https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=BUIQC7YAgnXst97hx0H5lbct96vIQaSX')
     .then(parseJson)
-    .then(getHardcoverFiction)
+    .then(getHardcoverFiction), 3000)
     
-    fetch('https://api.nytimes.com/svc/books/v3/lists/current/trade-fiction-paperback.json?api-key=BUIQC7YAgnXst97hx0H5lbct96vIQaSX')
+    setTimeout(fetch('https://api.nytimes.com/svc/books/v3/lists/current/trade-fiction-paperback.json?api-key=BUIQC7YAgnXst97hx0H5lbct96vIQaSX')
     .then(parseJson)
-    .then(getPaperbackFiction)
+    .then(getPaperbackFiction), 3000)
+
+    let form = document.querySelector('.form')
+
+    form.addEventListener('submit', function() {
+        event.preventDefault() 
+        let name = document.querySelector('#name')
+        let author = document.querySelector('#author')
+        let title = document.querySelector('#title')
+        let review = document.querySelector('#review')
+
+        let body = { reviewer_name: name.value,
+                     author: author.value,
+                     book_title: title.value, 
+                     review: review.value }
+        
+        fetch('http://localhost:3000/reviews', {
+            method: 'POST', 
+            headers: {
+                'Content-Type': 'application/json', 
+                'Accept': 'application/json' },
+            body: JSON.stringify(body)
+        })
+    });
+
+    fetch('http://localhost:3000/reviews')
+        .then(parseJson)
+        .then(object => {
+            object.map(review => {
+                let reviewList = document.querySelector('.review-list')
+                let h5 = document.createElement('h5') 
+                let h4 = document.createElement('h4') 
+                let h3 = document.createElement('h3') 
+                let p = document.createElement('p')
+                let button = document.createElement('button')
+                let id = review.id
+
+                button.innerText = 'Delete Review'
+                h3.innerText = review.book_title
+                h4.innerText = review.author
+                p.innerText = review.review
+                h5.innerText = review.reviewer_name
+
+                reviewList.append(h3, h4, p, h5, button)
+
+                button.addEventListener('click', function() {
+                    event.target.parentNode.remove()
+                    fetch(`http://localhost:3000/reviews/${review.id}`, {
+                        method: 'DELETE'
+                    })
+                })
+            })
+        });
             
     
     
@@ -87,10 +133,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 bookIcon.className='fas fa-book'
                 card.appendChild(bookIcon)
             })
-    };
-
-    function getPaperbackNonFiction(object) {
-        let bookArray = object.results.books
+        };
+        
+        function getPaperbackNonFiction(object) {
+            let bookArray = object.results.books
             
             bookArray.map(book => {
                 
@@ -141,11 +187,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 title.innerText = book.title
                 title.innerText = 'Buy It'
                 card.appendChild(title)
+                
+                let bookIcon = document.createElement('i')
+                bookIcon.className='fas fa-book'
+                card.appendChild(bookIcon)
             })
         };
-
-    function getHardcoverFiction(object) {
-        let bookArray = object.results.books
+        
+        function getHardcoverFiction(object) {
+            let bookArray = object.results.books
             
             bookArray.map(book => {
                 
@@ -196,11 +246,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 title.innerText = book.title
                 title.innerText = 'Buy It'
                 card.appendChild(title)
+                
+                let bookIcon = document.createElement('i')
+                bookIcon.className='fas fa-book'
+                card.appendChild(bookIcon)
             })
         };
-
-    function getPaperbackFiction(object) {
-        let bookArray = object.results.books
+        
+        function getPaperbackFiction(object) {
+            let bookArray = object.results.books
             
             bookArray.map(book => {
                 
@@ -251,11 +305,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 title.innerText = book.title
                 title.innerText = 'Buy It'
                 card.appendChild(title)
-    
+                
+                let bookIcon = document.createElement('i')
+                bookIcon.className='fas fa-book'
+                card.appendChild(bookIcon)
                 
             })
         };
-                
-            
-            
+        
+        
+        
 })

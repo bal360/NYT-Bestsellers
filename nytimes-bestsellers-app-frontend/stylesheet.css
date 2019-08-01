@@ -5,6 +5,7 @@
     display: flex;
     position: fixed;
     width: 100vw;
+    top: 0;
   }
   
   /* Style the links inside the navigation bar */
@@ -26,10 +27,13 @@
   
   /* Add a color to the active/current link */
   .topnav a.active {
-    background-color: rgb(16, 17, 16);
-    color: grey;
-    flex: 1;
-  } 
+      background-color: rgb(16, 17, 16);
+      color: grey;
+      flex: 1;
+    } 
+    .nonfiction-header {
+        margin-top: 80px;
+    }
 
   .nonfiction-container {
       max-width: 1400px;
@@ -98,6 +102,8 @@
   /* Add shadows to create the "card" effect */
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
+  display: flex;
+  flex-direction: column;
 }
 
 /* On mouse-over, add a deeper shadow */
@@ -110,14 +116,26 @@
   padding: 2px 16px;
 }
 
-.nonfiction-header {
-    display: flex;
-    flex:  1;
-}
 
 .rank {
     color: rgb(7, 7, 7);
     size: 5px;
+}
+
+.fa-book {
+   align-self: flex-end; 
+}
+
+.review-container {
+    display: flex;
+}
+
+form {
+    align-self: flex-start;
+}
+
+.review-list {
+    align-self: flex-end;
 }
 
 

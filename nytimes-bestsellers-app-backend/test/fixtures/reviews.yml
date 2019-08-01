@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  reviewer_name: MyString
+  author: MyString
+  book_title: MyString
+  review: MyText
+
+two:
+  reviewer_name: MyString
+  author: MyString
+  book_title: MyString
+  review: MyText
