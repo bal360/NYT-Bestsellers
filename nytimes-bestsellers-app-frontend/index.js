@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-   
+    
+    let form = document.querySelector('.form')
 
 
     fetch('https://api.nytimes.com/svc/books/v3/lists/current/hardcover-nonfiction.json?api-key=BUIQC7YAgnXst97hx0H5lbct96vIQaSX')
@@ -18,7 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
     .then(parseJson)
     .then(getPaperbackFiction), 3000)
 
-    let form = document.querySelector('.form')
 
     form.addEventListener('submit', function() {
         event.preventDefault() 
@@ -26,6 +26,8 @@ document.addEventListener('DOMContentLoaded', () => {
         let author = document.querySelector('#author')
         let title = document.querySelector('#title')
         let review = document.querySelector('#review')
+
+        appendNewReview()
 
         let body = { reviewer_name: name.value,
                      author: author.value,
@@ -63,6 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 button.addEventListener('click', function() {
                     event.target.parentNode.remove()
+                    console.log(event)
                     fetch(`http://localhost:3000/reviews/${review.id}`, {
                         method: 'DELETE'
                     })
@@ -312,7 +315,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 
             })
         };
-        
+
+        function appendNewReview() {
+            let reviewList = document.querySelector('.review-list')
+            let h5 = document.createElement('h5') 
+            let h4 = document.createElement('h4') 
+            let h3 = document.createElement('h3') 
+            let p = document.createElement('p')
+            let button = document.createElement('button')
+                    
+            button.innerText = 'Delete Review'
+            h3.innerText = title.value
+            h4.innerText = author.value
+            p.innerText = review.value
+            h5.innerText = name.value
+
+            reviewList.append(h3, h4, p, h5, button)
+        };
+            
         
         
 })
