@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     
     let form = document.querySelector('.form')
+    let likeIcon = document.createElement('i')
+    likeIcon.className='far fa-thumbs-up'
 
 
     fetch('https://api.nytimes.com/svc/books/v3/lists/current/hardcover-nonfiction.json?api-key=BUIQC7YAgnXst97hx0H5lbct96vIQaSX')
@@ -27,12 +29,13 @@ document.addEventListener('DOMContentLoaded', () => {
         let title = document.querySelector('#title')
         let review = document.querySelector('#review')
 
-        appendNewReview()
-
+        
         let body = { reviewer_name: name.value,
-                     author: author.value,
-                     book_title: title.value, 
-                     review: review.value }
+            author: author.value,
+            book_title: title.value, 
+            review: review.value }
+            
+        appendNewReview(body)
         
         fetch('http://localhost:3000/reviews', {
             method: 'POST', 
@@ -40,45 +43,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json' },
             body: JSON.stringify(body)
-        })
+        }).then(response => response.json())
+        event.target.reset()
     });
 
     fetch('http://localhost:3000/reviews')
         .then(parseJson)
-        .then(object => {
-            object.map(review => {
-                let reviewList = document.querySelector('.review-list')
-                let h5 = document.createElement('h5') 
-                let h4 = document.createElement('h4') 
-                let h3 = document.createElement('h3') 
-                let p = document.createElement('p')
-                let button = document.createElement('button')
-                let id = review.id
+        .then(object => object.map(appendNewReview))
 
-                button.innerText = 'Delete Review'
-                h3.innerText = review.book_title
-                h4.innerText = review.author
-                p.innerText = review.review
-                h5.innerText = review.reviewer_name
-
-                reviewList.append(h3, h4, p, h5, button)
-
-                button.addEventListener('click', function() {
-                    event.target.parentNode.remove()
-                    console.log(event)
-                    fetch(`http://localhost:3000/reviews/${review.id}`, {
-                        method: 'DELETE'
-                    })
-                })
-            })
-        });
             
-    
-    
-    
     function parseJson(response) {
         return response.json()
     };
+
+    
 
     function getHardcoverNonFiction(object) {
         let bookArray = object.results.books
@@ -109,10 +87,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 div.className='container'
                 card.appendChild(div)
                 
-                let author = document.createElement('p')
-                author.className='author'
-                author.innerText = `Author: ${book.author}`
-                card.appendChild(author)
+                // let author = document.createElement('p')
+                // author.className='author'
+                // author.innerText = `Author: ${book.author}`
+                // card.appendChild(author)
                 
                 let weeksOnList = document.createElement('p')
                 weeksOnList.className='weeks-on-list'
@@ -132,9 +110,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 title.innerText = 'Buy It'
                 card.appendChild(title)
 
-                let bookIcon = document.createElement('i')
-                bookIcon.className='fas fa-book'
-                card.appendChild(bookIcon)
+                let likeIcon = document.createElement('i')
+                likeIcon.className='far fa-thumbs-up'
+                card.appendChild(likeIcon)
             })
         };
         
@@ -150,7 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 let rank = document.createElement('h4')
                 rank.className='rank'
-                rank.innerText = `Rank ${book.rank}`
+                rank.innerText = book.rank
                 secondContainer.appendChild(rank)
                 
                 let card = document.createElement('div')
@@ -168,10 +146,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 card.appendChild(div)
                 
                 
-                let author = document.createElement('p')
-                author.className='author'
-                author.innerText = `Author: ${book.author}`
-                card.appendChild(author)
+                // let author = document.createElement('p')
+                // author.className='author'
+                // author.innerText = `Author: ${book.author}`
+                // card.appendChild(author)
                 
                 let weeksOnList = document.createElement('p')
                 weeksOnList.className='weeks-on-list'
@@ -191,9 +169,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 title.innerText = 'Buy It'
                 card.appendChild(title)
                 
-                let bookIcon = document.createElement('i')
-                bookIcon.className='fas fa-book'
-                card.appendChild(bookIcon)
+                let likeIcon = document.createElement('i')
+                likeIcon.className='far fa-thumbs-up'
+                card.appendChild(likeIcon)
             })
         };
         
@@ -209,7 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 let rank = document.createElement('h4')
                 rank.className='rank'
-                rank.innerText = `Rank ${book.rank}`
+                rank.innerText = book.rank
                 secondContainer.appendChild(rank)
                 
                 let card = document.createElement('div')
@@ -227,10 +205,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 card.appendChild(div)
                 
                 
-                let author = document.createElement('p')
-                author.className='author'
-                author.innerText = `Author: ${book.author}`
-                card.appendChild(author)
+                // let author = document.createElement('p')
+                // author.className='author'
+                // author.innerText = `Author: ${book.author}`
+                // card.appendChild(author)
                 
                 let weeksOnList = document.createElement('p')
                 weeksOnList.className='weeks-on-list'
@@ -250,9 +228,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 title.innerText = 'Buy It'
                 card.appendChild(title)
                 
-                let bookIcon = document.createElement('i')
-                bookIcon.className='fas fa-book'
-                card.appendChild(bookIcon)
+                let likeIcon = document.createElement('i')
+                likeIcon.className='far fa-thumbs-up'
+                card.appendChild(likeIcon)
             })
         };
         
@@ -268,7 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 let rank = document.createElement('h4')
                 rank.className='rank'
-                rank.innerText = `Rank ${book.rank}`
+                rank.innerText = book.rank
                 secondContainer.appendChild(rank)
                 
                 let card = document.createElement('div')
@@ -286,10 +264,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 card.appendChild(div)
                 
                 
-                let author = document.createElement('p')
-                author.className='author'
-                author.innerText = `Author: ${book.author}`
-                card.appendChild(author)
+                // let author = document.createElement('p')
+                // author.className='author'
+                // author.innerText = `Author: ${book.author}`
+                // card.appendChild(author)
                 
                 let weeksOnList = document.createElement('p')
                 weeksOnList.className='weeks-on-list'
@@ -309,28 +287,38 @@ document.addEventListener('DOMContentLoaded', () => {
                 title.innerText = 'Buy It'
                 card.appendChild(title)
                 
-                let bookIcon = document.createElement('i')
-                bookIcon.className='fas fa-book'
-                card.appendChild(bookIcon)
+                let likeIcon = document.createElement('i')
+                likeIcon.className='far fa-thumbs-up'
+                card.appendChild(likeIcon)
                 
             })
         };
 
-        function appendNewReview() {
-            let reviewList = document.querySelector('.review-list')
-            let h5 = document.createElement('h5') 
-            let h4 = document.createElement('h4') 
-            let h3 = document.createElement('h3') 
-            let p = document.createElement('p')
-            let button = document.createElement('button')
-                    
-            button.innerText = 'Delete Review'
-            h3.innerText = title.value
-            h4.innerText = author.value
-            p.innerText = review.value
-            h5.innerText = name.value
+        function appendNewReview(review) {
+            let reviewList = document.querySelector('.reviews')
+                let h5 = document.createElement('h5') 
+                let li = document.createElement('li') 
+                let h4 = document.createElement('h4') 
+                let h3 = document.createElement('h3') 
+                let p = document.createElement('p')
+                let button = document.createElement('button')
+                let id = review.id
 
-            reviewList.append(h3, h4, p, h5, button)
+                button.innerText = 'Delete Review'
+                h3.innerText = review.book_title
+                h4.innerText = review.author
+                p.innerText = review.review
+                h5.innerText = review.reviewer_name
+
+                reviewList.appendChild(li)
+                li.append(h3, h4, p, h5, button)
+
+                button.addEventListener('click', function() {
+                    event.target.parentNode.remove()
+                    fetch(`http://localhost:3000/reviews/${review.id}`, {
+                        method: 'DELETE'
+                    })
+                })
         };
             
         

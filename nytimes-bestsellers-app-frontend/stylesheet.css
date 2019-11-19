@@ -119,25 +119,86 @@
 
 .rank {
     color: rgb(7, 7, 7);
-    size: 5px;
+    font-weight: bold;
+    font-family: 'Goudy Bookletter 1911', serif;
+    font-size: 30px;
 }
 
-.fa-book {
-   align-self: flex-end; 
-}
 
 .review-container {
     display: flex;
+    background-image: url('https://techcrunch.com/wp-content/uploads/2016/10/gettyimages-548328327.jpg?w=1390&crop=1');
 }
 
-form {
-    align-self: flex-start;
+.form {
+    right: 0;
+    margin: 20px;
+    max-width: 300px;
+    padding: 16px;
+    background-color: rgba(129, 84, 84, 0.096);  
 }
 
 .review-list {
-    align-self: flex-end;
+    /* display: flex; */
+    /* align-self: flex-end; */
+    /* justify-content: space-between; */
+    /* box-sizing: border-box; */
 }
 
+.reviews {
+    display: flex;
+    flex-wrap: wrap;
+    align-self: flex-end;
+    justify-content: space-between;
+    list-style-type: none;
+    box-sizing: border-box;
+    width: 60%; 
+    background-color: rgba(255, 255, 255, 0.829);
+
+}
+
+.far {
+    color: rgb(7, 7, 7);
+    padding-top: 10px;
+    justify-content: space-between;
+    align-self: center;
+}
+
+.far:hover {
+    color: red;
+}
+
+.amazon {
+
+    background-color: white;
+    color: black;
+    border: 2px solid rgb(140, 123, 141);
+    padding: 10px 20px;
+    padding-right: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    /* margin-left:20px; */
+    align-self: center;
+}
+
+.amazon:hover {
+    background-color: rgb(122, 100, 122);
+    color: white;
+}
+
+.description {
+    font-family: 'Crimson Pro', serif;
+}
+
+.weeks-on-list {
+    font-family: 'Goudy Bookletter 1911', serif;
+}
+
+h1 {
+    font-family: 'Goudy Bookletter 1911', serif;
+}
 
 
 

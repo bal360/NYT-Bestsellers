@@ -4,6 +4,8 @@
         <title>NYT BestSellers List</title>
         <link rel="stylesheet" href="./stylesheet.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css?family=Crimson+Pro&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Crimson+Pro|Goudy+Bookletter+1911&display=swap" rel="stylesheet">
     </head>
     <body>
         <header class="topnav">
@@ -46,25 +48,28 @@
         </div>
 
         <div class="review-container">
-            <form action="" class="form" id="review-anchor">
-                <label for="name">Name</label> 
-                <input required type="text" name="name" id="name"/>
-                
-                <label for="author">Author</label>
-                <input required type="text" name="author" id="author"/>
-                
-                <label for="title">Title</label>
-                <input required type="text" name="title" id="title"/>
-                
-                <label for="review">Review</label>
-                <textarea name="review" cols="30" rows="10" id="review">
-                </textarea>
-                
-                <input type="submit" value="Submit">
-            </form>
+            <div class="form">
+                <form action="" class="form" id="review-anchor">
+                    <label for="name">Name</label> 
+                    <input required type="text" name="name" id="name" placeholder="Enter Name"/>
+                    
+                    <label for="author">Author</label>
+                    <input required type="text" name="author" id="author" placeholder="Enter Author"/>
+                    
+                    <label for="title">Title</label>
+                    <input required type="text" name="title" id="title" placeholder="Enter Title"/>
+                    
+                    <label for="review">Review</label>
+                    <textarea name="review" cols="30" rows="10" id="review" placeholder="Write Your Review Here"></textarea>
+                    
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
             <div class="review-list" id="reviews-anchor">
-                <!-- create and append ul -->
-                <!-- create and append li for each review -->
+                <ul class='reviews'>
+                    <!-- create and append ul -->
+                    <!-- create and append li for each review -->
+                </ul>
             </div>
 
         </div>
